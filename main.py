@@ -3,6 +3,7 @@
 # throughout this file
 
 # source venv/bin/activate
+import sys
 import pygame
 from constants import *
 from player import *
@@ -41,6 +42,11 @@ def main():
         
         screen.fill("black")
         updatable.update(dt)
+        for asteroid in asteroids:
+            if asteroid.collision_Check(player):
+                print("Game over!")
+                sys.exit()
+        
         for object in drawable:
             object.draw(screen)
         pygame.display.flip()
