@@ -30,11 +30,11 @@ def main():
     shots = pygame.sprite.Group()
     
     Player.containers = (updatable, drawable)
-    player = Player(player_x_init, player_y_init)
-    Shot.containers = (updatable, drawable, shots)
-    
     Asteroid.containers = (asteroids, drawable, updatable)
     AsteroidField.containers = (updatable)
+    Shot.containers = (updatable, drawable, shots)
+    
+    player = Player(player_x_init, player_y_init)
     asteroid_field = AsteroidField()
     
     # =============================== Game loop start ========================================
@@ -51,7 +51,8 @@ def main():
             if asteroid.collision_Check(player):
                 print("Game over!")
                 sys.exit()
-                
+        
+        # see if shot colllided with asteroid, split asteroid and remove shot if so        
         for asteroid in asteroids:
             for shot in shots:
                 if asteroid.collision_Check(shot):
@@ -63,7 +64,7 @@ def main():
         pygame.display.flip()
         
         dt = clock.tick(60) / 1000 # 60 fps
-    
+    # =============================== Game loop end ========================================
     
     
 if __name__ == "__main__":
